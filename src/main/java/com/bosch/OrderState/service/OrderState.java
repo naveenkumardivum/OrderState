@@ -7,11 +7,8 @@ Robert Bosch Engineering and Business Solutions Private Limited.
 */
 package com.bosch.OrderState.service;
 
-import com.bosch.OrderState.model.OrderDetails;
-
 public interface OrderState {
 
-    void customOperationOnStateChange(OrderDetails orderDetails);
 
     String getState();
 

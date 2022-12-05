@@ -5,7 +5,7 @@ Dissemination of this information or reproduction of this material is strictly f
 Robert Bosch Engineering and Business Solutions Private Limited.
 
 */
-package com.bosch.OrderState.configuration;
+package com.bosch.OrderState.constants;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -445,7 +445,7 @@ public class ApplicationMessageConstants {
     }
 
     public enum STATES {
-        DRAFTED, SUBMITTED, APPROVED, REJECTED, PUBLISHED;
+        ORDER_PLACED, ORDER_CONFIRMED, READY_TO_SHIP, INTRANSIT, POD_UPLOADED, BUYER_APPROVED, PAYMENT_PROCESSED, REPLACMENT_INITIATED, REPLACEMENT_CONFIRMED, RETURN_INITIATED, RETURN_CONFIRMED, ORDER_RETURNED, REFUND_INITIATED, BUYER_REJECTED, REJECTED_WITH_POD, REJECTED, ORDER_CANCEL_CONFIRMED, ORDER_CANCEL_INITIATED
     }
 
     public enum REJECT_REASONS {

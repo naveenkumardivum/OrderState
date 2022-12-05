@@ -7,11 +7,12 @@ Robert Bosch Engineering and Business Solutions Private Limited.
 */
 package com.bosch.OrderState.service;
 
-import com.bosch.OrderState.configuration.ErrorMessageConstants;
-import com.bosch.OrderState.configuration.MSSBadRequestException;
+import com.bosch.OrderState.constants.ErrorMessageConstants;
+import com.bosch.OrderState.constants.MSSBadRequestException;
 import com.bosch.OrderState.model.OrderDTO;
 import com.bosch.OrderState.model.OrderDetails;
 import com.bosch.OrderState.model.ProductOrder;
+import com.bosch.OrderState.model.Status;
 import com.bosch.OrderState.repository.OrderRepository;
 import com.bosch.OrderState.repository.StatusRepositoryService;
 import org.modelmapper.ModelMapper;
@@ -60,21 +61,18 @@ public class StateChangeService {
     }
 
 
-    private OrderDTO updateProduct(OrderDetails orderDetails, String nextStatus) {
-        ProductOrder orderDetail = orderDetails.getProductOrder();
-        orderDetail.setOrderStatus(getStatus(nextStatus));
-
-        ProductOrder productOrder;
-        productOrder = orderRepository.save(orderDetail);
-        OrderDTO orderDTO = modelMapper.map(productOrder, OrderDTO.class);
-        return orderDTO;
+    public OrderDTO updateProduct(OrderDetails orderDetails, String nextStatus) {
+        ProductOrder inputOrderDetail = orderDetails.getProductOrder();
+        inputOrderDetail.setOrderStatus(getStatus(nextStatus));
+        ProductOrder productOrder = orderRepository.save(inputOrderDetail);
+        return modelMapper.map(productOrder, OrderDTO.class);
     }
 
     private String getStatus(String nextStatus) {
-        Optional<String> status = statusRepositoryService.findByStatus(nextStatus);
+        Optional<Status> status = statusRepositoryService.findByOrderStatus(nextStatus);
         if (!status.isPresent()) {
             throw new MSSBadRequestException("E000038", ErrorMessageConstants.E000038);
         }
-        return status.get();
+        return status.get().getOrderStatus();
     }
 }

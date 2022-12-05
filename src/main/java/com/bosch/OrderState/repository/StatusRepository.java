@@ -7,7 +7,7 @@ Robert Bosch Engineering and Business Solutions Private Limited.
 */
 package com.bosch.OrderState.repository;
 
-import com.bosch.OrderState.configuration.Status;
+import com.bosch.OrderState.model.Status;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -16,6 +16,6 @@ import java.util.Optional;
 @Repository
 public interface StatusRepository extends JpaRepository<Status, String> {
 
-    Optional<String> findByStatus(String status);
+    Optional<Status> findByOrderStatus(String orderStatus);
 }
 

@@ -7,39 +7,38 @@ Robert Bosch Engineering and Business Solutions Private Limited.
 */
 package com.bosch.OrderState.model;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
-@Getter
-@Setter
-@ToString
 @Entity
-@Table(name = "TBL_PRODUCT_ORDER")
-public class ProductOrder {
+@Table(name = "TBL_STATUS")
+public class Status {
+
     private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
-    @Column(name = "PRODUCT_ORDER_ID")
-    private String productOrderId;
+    @Column(name = "STATUS_ID")
+    private String statusId;
 
-    @Column(name = "PRODUCT_CATEGORY")
-    private String productCategory;
+    public String getStatusId() {
+        return statusId;
+    }
 
-    @Column(name = "ORDER_DATE")
-    private String orderDate;
+    public void setStatusId(String statusId) {
+        this.statusId = statusId;
+    }
 
-    @Column(name = "ORDER_STATUS")
+    public String getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(String orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
     private String orderStatus;
 
-    @Column(name = "CART_ITEM_COUNT")
-    private int cartItemCount;
-
-    //    @Version
-    @Column(name = "VERSION_NUMBER")
-    private int version;
 }

@@ -8,6 +8,7 @@ Robert Bosch Engineering and Business Solutions Private Limited.
 */
 package com.bosch.OrderState.repository;
 
+import com.bosch.OrderState.model.Status;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -17,5 +18,5 @@ import java.util.Optional;
  */
 @Service
 public interface StatusRepositoryService {
-    Optional<String> findByStatus(String status);
+    Optional<Status> findByOrderStatus(String orderStatus);
 }

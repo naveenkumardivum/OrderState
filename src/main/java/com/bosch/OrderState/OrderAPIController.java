@@ -5,25 +5,23 @@ Dissemination of this information or reproduction of this material is strictly f
 Robert Bosch Engineering and Business Solutions Private Limited.
 
 */
-package com.bosch.OrderState.repository;
+package com.bosch.OrderState;
 
-import com.bosch.OrderState.model.Status;
+import com.bosch.OrderState.model.OrderDTO;
+import com.bosch.OrderState.model.OrderDetails;
+import com.bosch.OrderState.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Optional;
+@RestController
+public class OrderAPIController implements ProductApi {
 
-/**
- * @author IMM8KOR
- */
-@Service
-public class StatusRepositoryServiceImpl implements StatusRepositoryService {
 
     @Autowired
-    StatusRepository statusRepository;
+    private OrderService orderService;
 
     @Override
-    public Optional<Status> findByOrderStatus(String orderStatus) {
-        return statusRepository.findByOrderStatus(orderStatus);
+    public OrderDTO updatedProductState(String uid, OrderDetails orderDetails) {
+        return orderService.updateOrderState(uid, orderDetails);
     }
 }

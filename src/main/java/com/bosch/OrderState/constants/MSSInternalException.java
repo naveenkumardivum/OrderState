@@ -5,7 +5,7 @@ Dissemination of this information or reproduction of this material is strictly f
 Robert Bosch Engineering and Business Solutions Private Limited.
 
 */
-package com.bosch.OrderState.configuration;
+package com.bosch.OrderState.constants;
 
 public class MSSInternalException extends RuntimeException {
 

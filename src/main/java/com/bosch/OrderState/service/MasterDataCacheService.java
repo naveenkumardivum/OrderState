@@ -8,7 +8,10 @@ Robert Bosch Engineering and Business Solutions Private Limited.
 package com.bosch.OrderState.service;
 
 import com.bosch.OrderState.configuration.Process;
-import com.bosch.OrderState.configuration.*;
+import com.bosch.OrderState.configuration.SequenceFlow;
+import com.bosch.OrderState.constants.ApplicationMessageConstants;
+import com.bosch.OrderState.constants.ErrorMessageConstants;
+import com.bosch.OrderState.constants.MSSInternalException;
 import com.bosch.OrderState.model.OrderWorkflowTransition;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.dataformat.xml.JacksonXmlModule;
@@ -105,6 +108,7 @@ public class MasterDataCacheService {
         /**
          * assumption - this would be read from cache
          */
+        HashMap<String, HashMap<String, HashMap<String, HashMap<String, String>>>> ctgToVersionToSrcDestSetMap = CTG_TO_VERSION_TO_SRC_DEST_SET_MAP;
         HashMap<String, HashMap<String, HashMap<String, String>>> versionToSrcRefToDestRoleSetMapForCtg = CTG_TO_VERSION_TO_SRC_DEST_SET_MAP.get(productCtg);
 
         if (versionToSrcRefToDestRoleSetMapForCtg == null || versionToSrcRefToDestRoleSetMapForCtg.isEmpty()) {
@@ -115,7 +119,7 @@ public class MasterDataCacheService {
 
             } else {
                 HashMap<String, String> srcRefToTargetRefRoleSet = versionToSrcRefToDestRoleSetMap.get(currentStatus.trim().toUpperCase());
-                if (srcRefToTargetRefRoleSet.equals(targetRoleMap)) {
+                if ((srcRefToTargetRefRoleSet.containsKey(targetRoleMap.keySet().iterator().next())) && (srcRefToTargetRefRoleSet.containsValue(targetRoleMap.get(targetRoleMap.keySet().iterator().next())))) {
                     isValidStateToSet = true;
                 }
             }

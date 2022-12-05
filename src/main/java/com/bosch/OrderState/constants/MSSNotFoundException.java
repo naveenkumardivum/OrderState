@@ -5,26 +5,19 @@ Dissemination of this information or reproduction of this material is strictly f
 Robert Bosch Engineering and Business Solutions Private Limited.
 
 */
-package com.bosch.OrderState.model;
+package com.bosch.OrderState.constants;
 
-import lombok.*;
+public class MSSNotFoundException extends RuntimeException {
 
-import java.util.Date;
+    private static final long serialVersionUID = -9199092646157789340L;
+    private final String error;
 
+    public MSSNotFoundException(String error, String message) {
+        super(message);
+        this.error = error;
+    }
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
-@Builder
-public class OrderDTO {
-    private String createdBy;
-    private Date createdDate;
-    private String lastModifiedBy;
-    private Date lastModifiedDate;
-    private String orderId;
-    private String productCategory;
-    private String orderDate;
-    private String orderStatus;
+    public String getError() {
+        return error;
+    }
 }

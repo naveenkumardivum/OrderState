@@ -5,19 +5,19 @@ Dissemination of this information or reproduction of this material is strictly f
 Robert Bosch Engineering and Business Solutions Private Limited.
 
 */
-package com.bosch.OrderState.configuration;
+package com.bosch.OrderState.constants;
 
 public class MSSBadRequestException extends RuntimeException {
 
-	private static final long serialVersionUID = 8999395823477394986L;
-	private final String error;
-	
-	public MSSBadRequestException(String error, String message) {
+    private static final long serialVersionUID = 8999395823477394986L;
+    private final String error;
+
+    public MSSBadRequestException(String error, String message) {
         super(message);
         this.error = error;
     }
-	
-	public String getError() {
+
+    public String getError() {
         return error;
     }
 }

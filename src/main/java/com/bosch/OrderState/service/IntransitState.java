@@ -5,25 +5,26 @@ Dissemination of this information or reproduction of this material is strictly f
 Robert Bosch Engineering and Business Solutions Private Limited.
 
 */
-package com.bosch.OrderState.repository;
+package com.bosch.OrderState.service;
 
-import com.bosch.OrderState.model.Status;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.bosch.OrderState.constants.ApplicationMessageConstants;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
-/**
- * @author IMM8KOR
- */
 @Service
-public class StatusRepositoryServiceImpl implements StatusRepositoryService {
+public class IntransitState implements OrderState {
 
-    @Autowired
-    StatusRepository statusRepository;
+    private static final String STATE = ApplicationMessageConstants.STATES.INTRANSIT.toString();
+
+    private static final String STATE_PERMISSION = ApplicationMessageConstants.ROLES.MSS_P_ADM.toString();
 
     @Override
-    public Optional<Status> findByOrderStatus(String orderStatus) {
-        return statusRepository.findByOrderStatus(orderStatus);
+    public String getState() {
+        return STATE;
     }
+
+    @Override
+    public String getStatePermission() {
+        return STATE_PERMISSION;
+    }
+
 }

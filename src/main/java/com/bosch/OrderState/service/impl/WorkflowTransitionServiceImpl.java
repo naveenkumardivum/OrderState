@@ -31,9 +31,7 @@ public class WorkflowTransitionServiceImpl implements WorkflowTransitionService 
     @Autowired
     WorkflowTransitionRepository workflowTransitionRepository;
 
-    /**
-     * find all the workflow transition files
-     */
+
     @Override
     public List<OrderWorkflowTransition> findAll() {
         return workflowTransitionRepository.findAll();
