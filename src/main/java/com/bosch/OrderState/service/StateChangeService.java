@@ -24,7 +24,7 @@ import java.util.Optional;
 @Service
 public class StateChangeService {
 
-    String prodStateToSet = "ORDER_CONFIRMED";
+    OrderState orderState;
     OrderDetails orderDetails;
 
     @Autowired
@@ -39,11 +39,12 @@ public class StateChangeService {
     public OrderDTO updateOrderState(OrderDetails orderDetails) {
 
         this.orderDetails = orderDetails;
+        this.orderState = orderState;
 
         isValidNextState();
 
 
-        return updateProduct(orderDetails, prodStateToSet);
+        return updateProduct(orderDetails, orderState.getState());
     }
 
     /**
@@ -54,9 +55,9 @@ public class StateChangeService {
         String currentStatus = productOrder.getOrderStatus();
         String categoryId = productOrder.getProductCategory();
 
-        if (!MasterDataCacheService.isValidNextState(currentStatus, prodStateToSet, "BUYER", categoryId)) {
+        if (!MasterDataCacheService.isValidNextState(currentStatus, orderState.getState(), orderState.getStatePermission(), categoryId)) {
             throw new MSSBadRequestException("E000041",
-                    currentStatus + ErrorMessageConstants.E000041 + prodStateToSet);
+                    currentStatus + ErrorMessageConstants.E000041 + orderState);
         }
     }
 
