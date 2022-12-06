@@ -75,38 +75,82 @@
     <task id="ORDER_CANCEL_CONFIRMED" name="ORDER CANCEL CONFIRMED">
         <incoming>Order_Cancel_Initiated_To_Order_Cancel_Confirmed</incoming>
     </task>
-    <sequenceFlow id="Order_Placed_To_Rejected" sourceRef="ORDER_PLACED" targetRef="REJECTED" allowedRoles="BUYER"/>
-    <sequenceFlow id="Order_Placed_To_Order_Confirmed" sourceRef="ORDER_PLACED" targetRef="ORDER_CONFIRMED"
-                  allowedRoles="BUYER"/>
+    <sequenceFlow id="Order_Placed_To_Rejected" sourceRef="ORDER_PLACED" targetRef="REJECTED">
+        <allowedRoles>BUYER</allowedRoles>
+        <allowedRoles>ADMIN</allowedRoles>
+    </sequenceFlow>
+    <sequenceFlow id="Order_Placed_To_Order_Confirmed" sourceRef="ORDER_PLACED" targetRef="ORDER_CONFIRMED">
+        <allowedRoles>BUYER</allowedRoles>
+        <allowedRoles>ADMIN</allowedRoles>
+    </sequenceFlow>
     <sequenceFlow id="Order_Confirmed_To_Order_Cancel_Initiated" sourceRef="ORDER_CONFIRMED"
-                  targetRef="ORDER_CANCEL_INITIATED" allowedRoles="BUYER"/>
-    <sequenceFlow id="Order_Confirmed_To_Ready_To_Ship" sourceRef="ORDER_CONFIRMED" targetRef="READY_TO_SHIP"
-                  allowedRoles="BUYER"/>
+                  targetRef="ORDER_CANCEL_INITIATED">
+        <allowedRoles>BUYER</allowedRoles>
+        <allowedRoles>ADMIN</allowedRoles>
+    </sequenceFlow>
+    <sequenceFlow id="Order_Confirmed_To_Ready_To_Ship" sourceRef="ORDER_CONFIRMED" targetRef="READY_TO_SHIP">
+        <allowedRoles>BUYER</allowedRoles>
+        <allowedRoles>ADMIN</allowedRoles>
+    </sequenceFlow>
     <sequenceFlow id="Replacement_Confirmed_To_Ready_To_Ship" sourceRef="REPLACEMENT_CONFIRMED"
-                  targetRef="READY_TO_SHIP" allowedRoles="BUYER"/>
-    <sequenceFlow id="Intransit_To_Rejected_With_POD" sourceRef="INTRANSIT" targetRef="REJECTED_WITH_POD"
-                  allowedRoles="BUYER"/>
-    <sequenceFlow id="Intransit_To_POD_Uploaded" sourceRef="INTRANSIT" targetRef="POD_UPLOADED" allowedRoles="BUYER"/>
-    <sequenceFlow id="POD_Uploaded_To_Buyer_Rejected" sourceRef="POD_UPLOADED" targetRef="BUYER_REJECTED"
-                  allowedRoles="BUYER"/>
-    <sequenceFlow id="POD_Uploaded_To_Buyer_Approved" sourceRef="POD_UPLOADED" targetRef="BUYER_APPROVED"
-                  allowedRoles="BUYER"/>
-    <sequenceFlow id="Buyer_Approved_To_Payment_Processed" sourceRef="BUYER_APPROVED" targetRef="PAYMENT_PROCESSED"
-                  allowedRoles="BUYER"/>
-    <sequenceFlow id="Buyer_Approved_To_Return_Initiated" sourceRef="BUYER_APPROVED" targetRef="RETURN_INITIATED"
-                  allowedRoles="BUYER"/>
+                  targetRef="READY_TO_SHIP">
+        <allowedRoles>BUYER</allowedRoles>
+        <allowedRoles>ADMIN</allowedRoles>
+    </sequenceFlow>
+    <sequenceFlow id="Intransit_To_Rejected_With_POD" sourceRef="INTRANSIT" targetRef="REJECTED_WITH_POD">
+        <allowedRoles>BUYER</allowedRoles>
+        <allowedRoles>ADMIN</allowedRoles>
+    </sequenceFlow>
+    <sequenceFlow id="Intransit_To_POD_Uploaded" sourceRef="INTRANSIT" targetRef="POD_UPLOADED">
+        <allowedRoles>BUYER</allowedRoles>
+        <allowedRoles>ADMIN</allowedRoles>
+    </sequenceFlow>
+    <sequenceFlow id="POD_Uploaded_To_Buyer_Rejected" sourceRef="POD_UPLOADED" targetRef="BUYER_REJECTED">
+        <allowedRoles>BUYER</allowedRoles>
+        <allowedRoles>ADMIN</allowedRoles>
+    </sequenceFlow>
+    <sequenceFlow id="POD_Uploaded_To_Buyer_Approved" sourceRef="POD_UPLOADED" targetRef="BUYER_APPROVED">
+        <allowedRoles>BUYER</allowedRoles>
+        <allowedRoles>ADMIN</allowedRoles>
+    </sequenceFlow>
+    <sequenceFlow id="Buyer_Approved_To_Payment_Processed" sourceRef="BUYER_APPROVED" targetRef="PAYMENT_PROCESSED">
+        <allowedRoles>BUYER</allowedRoles>
+        <allowedRoles>ADMIN</allowedRoles>
+    </sequenceFlow>
+    <sequenceFlow id="Buyer_Approved_To_Return_Initiated" sourceRef="BUYER_APPROVED" targetRef="RETURN_INITIATED">
+        <allowedRoles>BUYER</allowedRoles>
+        <allowedRoles>ADMIN</allowedRoles>
+    </sequenceFlow>
     <sequenceFlow id="Payment_Processed_To_Replacement_Initiated" sourceRef="PAYMENT_PROCESSED"
-                  targetRef="REPLACMENT_INITIATED" allowedRoles="BUYER"/>
+                  targetRef="REPLACMENT_INITIATED">
+        <allowedRoles>BUYER</allowedRoles>
+        <allowedRoles>ADMIN</allowedRoles>
+    </sequenceFlow>
     <sequenceFlow id="Buyer_Approved_To_Replacement_Initiated" sourceRef="BUYER_APPROVED"
-                  targetRef="REPLACMENT_INITIATED" allowedRoles="BUYER"/>
+                  targetRef="REPLACMENT_INITIATED">
+        <allowedRoles>BUYER</allowedRoles>
+        <allowedRoles>ADMIN</allowedRoles>
+    </sequenceFlow>
     <sequenceFlow id="Replacement_Initiated_To_Replacement_Confirmed" sourceRef="RETURN_INITIATED"
-                  targetRef="REPLACEMENT_CONFIRMED" allowedRoles="BUYER"/>
-    <sequenceFlow id="Return_Initiaated_To_Return_Confirmed" sourceRef="RETURN_INITIATED" targetRef="RETURN_CONFIRMED"
-                  allowedRoles="BUYER"/>
-    <sequenceFlow id="Return_Confirmed_To_Order_Returned" sourceRef="RETURN_CONFIRMED" targetRef="ORDER_RETURNED"
-                  allowedRoles="BUYER"/>
-    <sequenceFlow id="Order_Returned_To_Refund_Initiated" sourceRef="ORDER_RETURNED" targetRef="REFUND_INITIATED"
-                  allowedRoles="BUYER"/>
+                  targetRef="REPLACEMENT_CONFIRMED">
+        <allowedRoles>BUYER</allowedRoles>
+        <allowedRoles>ADMIN</allowedRoles>
+    </sequenceFlow>
+    <sequenceFlow id="Return_Initiaated_To_Return_Confirmed" sourceRef="RETURN_INITIATED" targetRef="RETURN_CONFIRMED">
+        <allowedRoles>BUYER</allowedRoles>
+        <allowedRoles>ADMIN</allowedRoles>
+    </sequenceFlow>
+    <sequenceFlow id="Return_Confirmed_To_Order_Returned" sourceRef="RETURN_CONFIRMED" targetRef="ORDER_RETURNED">
+        <allowedRoles>BUYER</allowedRoles>
+        <allowedRoles>ADMIN</allowedRoles>
+    </sequenceFlow>
+    <sequenceFlow id="Order_Returned_To_Refund_Initiated" sourceRef="ORDER_RETURNED" targetRef="REFUND_INITIATED">
+        <allowedRoles>BUYER</allowedRoles>
+        <allowedRoles>ADMIN</allowedRoles>
+    </sequenceFlow>
     <sequenceFlow id="Order_Cancel_Initiated_To_Order_Cancel_Confirmed" sourceRef="ORDER_CANCEL_INITIATED"
-                  targetRef="ORDER_CANCEL_CONFIRMED" allowedRoles="BUYER"/>
+                  targetRef="ORDER_CANCEL_CONFIRMED">
+        <allowedRoles>BUYER</allowedRoles>
+        <allowedRoles>ADMIN</allowedRoles>
+    </sequenceFlow>
 </process>

@@ -36,7 +36,7 @@ public class StateChangeService {
     @Autowired
     ModelMapper modelMapper;
 
-    public OrderDTO updateOrderState(OrderDetails orderDetails) {
+    public OrderDTO updateOrderState(OrderState orderState, OrderDetails orderDetails) {
 
         this.orderDetails = orderDetails;
         this.orderState = orderState;

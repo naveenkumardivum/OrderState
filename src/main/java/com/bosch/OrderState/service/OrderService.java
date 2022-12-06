@@ -34,6 +34,9 @@ public class OrderService {
     private OrderRepository orderRepository;
 
     @Autowired
+    private OrderStateFactory orderStateFactory;
+
+    @Autowired
     private StatusRepositoryService statusRepositoryService;
 
 
@@ -49,11 +52,13 @@ public class OrderService {
     @Transactional
     public OrderDTO updateOrderState(String uid, OrderDetails orderDetails) {
         ProductOrder productOrder = getOrderObj(uid);
+        String nextStatus = getStatusObj(orderDetails.getProductOrder().getOrderStatus());
+        OrderState orderState = orderStateFactory.getState(nextStatus);
         if (!orderDetails.getProductOrder().getProductCategory().equals(productOrder.getProductCategory())) {
             throw new MSSNotFoundException(E000437, ErrorMessageConstants.E000437);
         }
 
-        return stateChangeService.updateOrderState(orderDetails);
+        return stateChangeService.updateOrderState(orderState, orderDetails);
     }
 
     public ProductOrder getOrderObj(String orderId) {
