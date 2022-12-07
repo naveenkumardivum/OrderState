@@ -5,17 +5,19 @@ Dissemination of this information or reproduction of this material is strictly f
 Robert Bosch Engineering and Business Solutions Private Limited.
 
 */
-package com.bosch.OrderState.service;
+package com.bosch.OrderState.service.stateService;
 
 import com.bosch.OrderState.constants.ApplicationMessageConstants;
+import com.bosch.OrderState.service.OrderState;
 import org.springframework.stereotype.Service;
 
 @Service
-public class OrderCancelInitiatedState implements OrderState {
+public class OrderConfirmedState implements OrderState {
 
-    private static final String STATE = ApplicationMessageConstants.STATES.ORDER_CANCEL_INITIATED.toString();
+    private static final String STATE = ApplicationMessageConstants.STATES.ORDER_CONFIRMED.toString();
 
-    private static final String STATE_PERMISSION = ApplicationMessageConstants.ROLES.MSS_P_ADM.toString();
+    private static final String STATE_PERMISSION = ApplicationMessageConstants.ROLES.SELLER.toString();
+
 
     @Override
     public String getState() {

@@ -9,8 +9,6 @@ package com.bosch.OrderState.model;
 
 import lombok.*;
 
-import java.util.Date;
-
 
 @Getter
 @Setter
@@ -19,10 +17,6 @@ import java.util.Date;
 @ToString
 @Builder
 public class OrderDTO {
-    private String createdBy;
-    private Date createdDate;
-    private String lastModifiedBy;
-    private Date lastModifiedDate;
     private String orderId;
     private String productCategory;
     private String orderDate;

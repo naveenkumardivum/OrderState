@@ -23,6 +23,7 @@ import org.springframework.stereotype.Service;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author IMM8KOR
@@ -32,7 +33,7 @@ public class MasterDataCacheService {
 
     private static final HashMap<String, HashMap<String, String>> HARDWARE_ORDER_WORKFLOW_MAP = new HashMap<>();
 
-    private static final HashMap<String, HashMap<String, HashMap<String, HashMap<String, String>>>> CTG_TO_VERSION_TO_SRC_DEST_SET_MAP = new HashMap<>();
+    private static final HashMap<String, HashMap<String, HashMap<String, HashMap<String, Set<String>>>>> CTG_TO_VERSION_TO_SRC_DEST_SET_MAP = new HashMap<>();
 
     public static void prepareWorkflow(List<OrderWorkflowTransition> listOfOrderWorkflowTransitions) {
         for (OrderWorkflowTransition workflow : listOfOrderWorkflowTransitions) {
@@ -42,16 +43,16 @@ public class MasterDataCacheService {
         }
         for (String categoryKey : HARDWARE_ORDER_WORKFLOW_MAP.keySet()) {
             HashMap<String, String> versionToWfNameMap = HARDWARE_ORDER_WORKFLOW_MAP.get(categoryKey);
-            HashMap<String, HashMap<String, HashMap<String, String>>> versionToSrcRefToDestRoleSetMap = new HashMap<>();
+            HashMap<String, HashMap<String, HashMap<String, Set<String>>>> versionToSrcRefToDestRoleSetMap = new HashMap<>();
             for (String versionKey : versionToWfNameMap.keySet()) {
                 String transitionFlowName = versionToWfNameMap.get(versionKey);
                 Process transitionProcess = loadTransitionFlow(transitionFlowName);
-                HashMap<String, HashMap<String, String>> sourceRefToTargetRefRoleSetMap = new HashMap<>();
+                HashMap<String, HashMap<String, Set<String>>> sourceRefToTargetRefRoleSetMap = new HashMap<>();
                 for (SequenceFlow seqFlow : transitionProcess.getSequenceFlow()) {
                     String sourceRef = seqFlow.getSourceRef();
                     String targetRef = seqFlow.getTargetRef();
-                    String allowedRole = seqFlow.getAllowedRoles();
-                    HashMap<String, String> targetRoleMap = sourceRefToTargetRefRoleSetMap.get(sourceRef);
+                    Set<String> allowedRole = seqFlow.getAllowedRoles();
+                    HashMap<String, Set<String>> targetRoleMap = sourceRefToTargetRefRoleSetMap.get(sourceRef);
                     if (targetRoleMap == null)
                         targetRoleMap = new HashMap<>();
                     targetRoleMap.put(targetRef, allowedRole);
@@ -108,18 +109,20 @@ public class MasterDataCacheService {
         /**
          * assumption - this would be read from cache
          */
-        HashMap<String, HashMap<String, HashMap<String, HashMap<String, String>>>> ctgToVersionToSrcDestSetMap = CTG_TO_VERSION_TO_SRC_DEST_SET_MAP;
-        HashMap<String, HashMap<String, HashMap<String, String>>> versionToSrcRefToDestRoleSetMapForCtg = CTG_TO_VERSION_TO_SRC_DEST_SET_MAP.get(productCtg);
+        HashMap<String, HashMap<String, HashMap<String, HashMap<String, Set<String>>>>> ctgToVersionToSrcDestSetMap = CTG_TO_VERSION_TO_SRC_DEST_SET_MAP;
+        HashMap<String, HashMap<String, HashMap<String, Set<String>>>> versionToSrcRefToDestRoleSetMapForCtg = CTG_TO_VERSION_TO_SRC_DEST_SET_MAP.get(productCtg);
 
         if (versionToSrcRefToDestRoleSetMapForCtg == null || versionToSrcRefToDestRoleSetMapForCtg.isEmpty()) {
 
         } else {
-            HashMap<String, HashMap<String, String>> versionToSrcRefToDestRoleSetMap = versionToSrcRefToDestRoleSetMapForCtg.get(workFlowVersion);
+            HashMap<String, HashMap<String, Set<String>>> versionToSrcRefToDestRoleSetMap = versionToSrcRefToDestRoleSetMapForCtg.get(workFlowVersion);
             if (versionToSrcRefToDestRoleSetMap == null || versionToSrcRefToDestRoleSetMap.isEmpty()) {
 
             } else {
-                HashMap<String, String> srcRefToTargetRefRoleSet = versionToSrcRefToDestRoleSetMap.get(currentStatus.trim().toUpperCase());
-                if ((srcRefToTargetRefRoleSet.containsKey(targetRoleMap.keySet().iterator().next())) && (srcRefToTargetRefRoleSet.containsValue(targetRoleMap.get(targetRoleMap.keySet().iterator().next())))) {
+                HashMap<String, Set<String>> srcRefToTargetRefRoleSet = versionToSrcRefToDestRoleSetMap.get(currentStatus.trim().toUpperCase());
+                String key = targetRoleMap.keySet().iterator().next();
+                String value = targetRoleMap.get(targetRoleMap.keySet().iterator().next());
+                if ((srcRefToTargetRefRoleSet.containsKey(key) && (srcRefToTargetRefRoleSet.get(key).contains(value)))) {
                     isValidStateToSet = true;
                 }
             }

@@ -7,6 +7,8 @@ Robert Bosch Engineering and Business Solutions Private Limited.
 */
 package com.bosch.OrderState.configuration;
 
+import java.util.Set;
+
 public class SequenceFlow {
     private String targetRef;
 
@@ -14,7 +16,16 @@ public class SequenceFlow {
 
     private String sourceRef;
 
-    private String allowedRoles;
+
+    public Set<String> getAllowedRoles() {
+        return allowedRoles;
+    }
+
+    public void setAllowedRoles(Set<String> allowedRoles) {
+        this.allowedRoles = allowedRoles;
+    }
+
+    private Set<String> allowedRoles;
 
     public String getTargetRef() {
         return targetRef;
@@ -40,13 +51,6 @@ public class SequenceFlow {
         this.sourceRef = sourceRef;
     }
 
-    public String getAllowedRoles() {
-        return allowedRoles;
-    }
-
-    public void setAllowedRoles(String allowedRoles) {
-        this.allowedRoles = allowedRoles;
-    }
 
     @Override
     public String toString() {

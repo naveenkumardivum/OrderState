@@ -75,6 +75,6 @@ public class OrderService {
         if (!status.isPresent()) {
             throw new MSSNotFoundException("E000052", ErrorMessageConstants.E000052);
         }
-        return status.get().toString();
+        return status.get().getOrderStatus();
     }
 }

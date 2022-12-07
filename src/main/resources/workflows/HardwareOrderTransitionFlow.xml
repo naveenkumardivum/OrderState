@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <process id="Hardware_Status" name="Hardware Status Flow"
          isExecutable="false">
+    <task id="DRAFT" name="DRAFT">
+        <outgoing>Draft_To_Order_Confirmed</outgoing>
+    </task>
     <task id="ORDER_PLACED" name="ORDER PLACED">
         <outgoing>Order_Placed_To_Rejected</outgoing>
         <outgoing>Order_Placed_To_Order_Confirmed</outgoing>
@@ -79,6 +82,9 @@
         <allowedRoles>BUYER</allowedRoles>
         <allowedRoles>ADMIN</allowedRoles>
     </sequenceFlow>
+    <sequenceFlow id="Draft_To_Completed" sourceRef="DRAFT" targetRef="ORDER_PLACED">
+        <allowedRoles>BUYER</allowedRoles>
+    </sequenceFlow>
     <sequenceFlow id="Order_Placed_To_Order_Confirmed" sourceRef="ORDER_PLACED" targetRef="ORDER_CONFIRMED">
         <allowedRoles>BUYER</allowedRoles>
         <allowedRoles>ADMIN</allowedRoles>
@@ -136,7 +142,7 @@
         <allowedRoles>BUYER</allowedRoles>
         <allowedRoles>ADMIN</allowedRoles>
     </sequenceFlow>
-    <sequenceFlow id="Return_Initiaated_To_Return_Confirmed" sourceRef="RETURN_INITIATED" targetRef="RETURN_CONFIRMED">
+    <sequenceFlow id="Return_Initiated_To_Return_Confirmed" sourceRef="RETURN_INITIATED" targetRef="RETURN_CONFIRMED">
         <allowedRoles>BUYER</allowedRoles>
         <allowedRoles>ADMIN</allowedRoles>
     </sequenceFlow>

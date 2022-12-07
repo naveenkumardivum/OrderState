@@ -2,6 +2,7 @@
 package com.bosch.OrderState.service;
 
 import com.bosch.OrderState.constants.ApplicationMessageConstants;
+import com.bosch.OrderState.service.stateService.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -51,6 +52,9 @@ public class OrderStateFactory {
     private RejectedWithPODState rejectedWithPODState;
 
     @Autowired
+    private OrderDraftState orderDraftState;
+
+    @Autowired
     private ReplacementConfirmedState replacementConfirmedState;
 
     @Autowired
@@ -68,6 +72,9 @@ public class OrderStateFactory {
 
         OrderState orderState;
         switch (stateString) {
+            case ORDER_PLACED:
+                orderState = orderPlacedState;
+                break;
             case ORDER_CONFIRMED:
                 orderState = orderConfirmedState;
                 break;
@@ -120,10 +127,9 @@ public class OrderStateFactory {
                 orderState = orderCancelInitiatedState;
                 break;
             default:
-                orderState = orderPlacedState;
+                orderState = orderDraftState;
                 break;
         }
-
         return orderState;
     }
 }
