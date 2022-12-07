@@ -12,10 +12,9 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import java.util.List;
 
 public class Task {
-    //    @JacksonXmlProperty(localName = "incoming")
+
     private List<String> incoming;
 
-    //    @JacksonXmlProperty(localName = "outcoming")
     private List<String> outgoing;
 
     @JacksonXmlProperty(isAttribute = true)

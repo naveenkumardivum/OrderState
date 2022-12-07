@@ -27,6 +27,8 @@ public class StateChangeService {
     OrderState orderState;
     OrderDetails orderDetails;
 
+    String role;
+
     @Autowired
     private OrderRepository orderRepository;
 
@@ -36,33 +38,28 @@ public class StateChangeService {
     @Autowired
     ModelMapper modelMapper;
 
-    public OrderDTO updateOrderState(OrderState orderState, OrderDetails orderDetails) {
+    public OrderDTO updateOrderState(OrderState orderState,String role, OrderDetails orderDetails) {
 
         this.orderDetails = orderDetails;
         this.orderState = orderState;
-
+        this.role = role;
         isValidNextState();
-
-
-        return updateProduct(orderDetails, orderState.getState());
+        return updateOrder(orderDetails, orderState.getState());
     }
 
-    /**
-     * validate if requested state can be attained
-     */
     private void isValidNextState() {
         ProductOrder productOrder = orderDetails.getProductOrder();
         String currentStatus = productOrder.getOrderStatus();
         String categoryId = productOrder.getProductCategory();
 
-        if (!MasterDataCacheService.isValidNextState(currentStatus, orderState.getState(), orderState.getStatePermission(), categoryId)) {
+        if (!MasterDataCacheService.isValidNextState(currentStatus, orderState.getState(), role,categoryId)) {
             throw new MSSBadRequestException("E000041",
                     currentStatus + ErrorMessageConstants.E000041 + orderState);
         }
     }
 
 
-    public OrderDTO updateProduct(OrderDetails orderDetails, String nextStatus) {
+    public OrderDTO updateOrder(OrderDetails orderDetails, String nextStatus) {
         ProductOrder inputOrderDetail = orderDetails.getProductOrder();
         inputOrderDetail.setOrderStatus(getStatus(nextStatus));
         ProductOrder productOrder = orderRepository.save(inputOrderDetail);

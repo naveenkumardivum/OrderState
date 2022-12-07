@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-public interface ProductApi {
+public interface OrderAPI {
 
-    @PutMapping(value = "/api/{uid}", produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {
+    @PutMapping(value = "/api/{uid}/{role}", produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {
             MediaType.APPLICATION_JSON_VALUE})
-    OrderDTO updatedProductState(@PathVariable String uid, @RequestBody OrderDetails orderDetails);
+    OrderDTO updateOrderState(@PathVariable String uid , @PathVariable String role, @RequestBody OrderDetails orderDetails);
 }

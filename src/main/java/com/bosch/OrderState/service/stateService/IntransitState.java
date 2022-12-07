@@ -16,16 +16,10 @@ public class IntransitState implements OrderState {
 
     private static final String STATE = ApplicationMessageConstants.STATES.INTRANSIT.toString();
 
-    private static final String STATE_PERMISSION = ApplicationMessageConstants.ROLES.BUYER.toString();
 
     @Override
     public String getState() {
         return STATE;
-    }
-
-    @Override
-    public String getStatePermission() {
-        return STATE_PERMISSION;
     }
 
 }

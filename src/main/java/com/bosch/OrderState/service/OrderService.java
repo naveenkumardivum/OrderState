@@ -50,15 +50,16 @@ public class OrderService {
 
 
     @Transactional
-    public OrderDTO updateOrderState(String uid, OrderDetails orderDetails) {
+    public OrderDTO updateOrderState(String uid,String role, OrderDetails orderDetails) {
         ProductOrder productOrder = getOrderObj(uid);
         String nextStatus = getStatusObj(orderDetails.getProductOrder().getOrderStatus());
         OrderState orderState = orderStateFactory.getState(nextStatus);
         if (!orderDetails.getProductOrder().getProductCategory().equals(productOrder.getProductCategory())) {
             throw new MSSNotFoundException(E000437, ErrorMessageConstants.E000437);
         }
+        orderDetails.setProductOrder(productOrder);
 
-        return stateChangeService.updateOrderState(orderState, orderDetails);
+        return stateChangeService.updateOrderState(orderState,role, orderDetails);
     }
 
     public ProductOrder getOrderObj(String orderId) {

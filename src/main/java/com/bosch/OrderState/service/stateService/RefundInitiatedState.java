@@ -16,16 +16,9 @@ public class RefundInitiatedState implements OrderState {
 
     private static final String STATE = ApplicationMessageConstants.STATES.REFUND_INITIATED.toString();
 
-    private static final String STATE_PERMISSION = ApplicationMessageConstants.ROLES.BUYER.toString();
-
     @Override
     public String getState() {
         return STATE;
-    }
-
-    @Override
-    public String getStatePermission() {
-        return STATE_PERMISSION;
     }
 
 }

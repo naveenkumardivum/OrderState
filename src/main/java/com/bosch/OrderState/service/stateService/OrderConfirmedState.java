@@ -24,9 +24,4 @@ public class OrderConfirmedState implements OrderState {
         return STATE;
     }
 
-    @Override
-    public String getStatePermission() {
-        return STATE_PERMISSION;
-    }
-
 }

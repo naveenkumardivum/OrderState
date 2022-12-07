@@ -14,14 +14,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class OrderAPIController implements ProductApi {
+public class OrderAPIController implements OrderAPI {
 
 
     @Autowired
     private OrderService orderService;
 
     @Override
-    public OrderDTO updatedProductState(String uid, OrderDetails orderDetails) {
-        return orderService.updateOrderState(uid, orderDetails);
+    public OrderDTO updateOrderState(String uid,String role, OrderDetails orderDetails) {
+        return orderService.updateOrderState(uid,role,orderDetails);
     }
 }

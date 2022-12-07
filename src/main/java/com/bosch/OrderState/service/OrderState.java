@@ -9,8 +9,5 @@ package com.bosch.OrderState.service;
 
 public interface OrderState {
 
-
     String getState();
-
-    String getStatePermission();
 }
