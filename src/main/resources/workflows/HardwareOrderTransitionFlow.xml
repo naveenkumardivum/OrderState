@@ -78,6 +78,10 @@
     <task id="ORDER_CANCEL_CONFIRMED" name="ORDER CANCEL CONFIRMED">
         <incoming>Order_Cancel_Initiated_To_Order_Cancel_Confirmed</incoming>
     </task>
+    <sequenceFlow id="Ready_To_Ship_To_Intransit" sourceRef="READY_TO_SHIP" targetRef="INTRANSIT">
+        <allowedRoles>ADMIN</allowedRoles>
+        <allowedRoles>BUYER</allowedRoles>
+    </sequenceFlow>
     <sequenceFlow id="Draft_To_Order_Placed" sourceRef="DRAFT" targetRef="ORDER_PLACED">
         <allowedRoles>SELLER</allowedRoles>
     </sequenceFlow>

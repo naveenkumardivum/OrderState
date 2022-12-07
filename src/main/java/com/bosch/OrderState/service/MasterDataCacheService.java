@@ -110,7 +110,7 @@ public class MasterDataCacheService {
          * assumption - this would be read from cache
          */
         HashMap<String, HashMap<String, HashMap<String, HashMap<String, Set<String>>>>> ctgToVersionToSrcDestSetMap = CTG_TO_VERSION_TO_SRC_DEST_SET_MAP;
-        HashMap<String, HashMap<String, HashMap<String, Set<String>>>> versionToSrcRefToDestRoleSetMapForCtg = CTG_TO_VERSION_TO_SRC_DEST_SET_MAP.get(productCtg);
+        HashMap<String, HashMap<String, HashMap<String, Set<String>>>> versionToSrcRefToDestRoleSetMapForCtg = ctgToVersionToSrcDestSetMap.get(productCtg);
 
         if (versionToSrcRefToDestRoleSetMapForCtg == null || versionToSrcRefToDestRoleSetMapForCtg.isEmpty()) {
 
