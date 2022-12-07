@@ -21,7 +21,7 @@ public class OrderAPIController implements OrderAPI {
     private OrderService orderService;
 
     @Override
-    public OrderDTO updateOrderState(String uid,String role, OrderDetails orderDetails) {
-        return orderService.updateOrderState(uid,role,orderDetails);
+    public OrderDTO updateOrderState(String uid, String role, OrderDetails orderDetails) {
+        return orderService.updateOrderState(uid, role, orderDetails);
     }
 }

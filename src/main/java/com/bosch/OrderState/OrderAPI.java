@@ -18,5 +18,5 @@ public interface OrderAPI {
 
     @PutMapping(value = "/api/{uid}/{role}", produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {
             MediaType.APPLICATION_JSON_VALUE})
-    OrderDTO updateOrderState(@PathVariable String uid , @PathVariable String role, @RequestBody OrderDetails orderDetails);
+    OrderDTO updateOrderState(@PathVariable String uid, @PathVariable String role, @RequestBody OrderDetails orderDetails);
 }

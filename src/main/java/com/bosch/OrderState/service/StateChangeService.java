@@ -38,7 +38,7 @@ public class StateChangeService {
     @Autowired
     ModelMapper modelMapper;
 
-    public OrderDTO updateOrderState(OrderState orderState,String role, OrderDetails orderDetails) {
+    public OrderDTO updateOrderState(OrderState orderState, String role, OrderDetails orderDetails) {
 
         this.orderDetails = orderDetails;
         this.orderState = orderState;
@@ -52,7 +52,7 @@ public class StateChangeService {
         String currentStatus = productOrder.getOrderStatus();
         String categoryId = productOrder.getProductCategory();
 
-        if (!MasterDataCacheService.isValidNextState(currentStatus, orderState.getState(), role,categoryId)) {
+        if (!MasterDataCacheService.isValidNextState(currentStatus, orderState.getState(), role, categoryId)) {
             throw new MSSBadRequestException("E000041",
                     currentStatus + ErrorMessageConstants.E000041 + orderState);
         }
