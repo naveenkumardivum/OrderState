@@ -4,13 +4,14 @@ package com.bosch.OrderState.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * @author IMM8KOR
  */
 @Entity
 @Table(name = "TBL_ORDER_WORKFLOW_TRANSITION")
-public class OrderWorkflowTransition {
+public class OrderWorkflowTransition extends AuditTrail implements Serializable {
 
     @Id
     @GeneratedValue(generator = "system-uuid")

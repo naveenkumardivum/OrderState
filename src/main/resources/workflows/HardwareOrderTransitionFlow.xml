@@ -38,7 +38,7 @@
         <incoming>Buyer_Approved_To_Payment_Processed</incoming>
         <outgoing>Payment_Processed_To_Replacement_Initiated</outgoing>
     </task>
-    <task id="REPLACMENT_INITIATED" name="REPLACMENT INITIATED">
+    <task id="REPLACEMENT_INITIATED" name="REPLACMENT INITIATED">
         <incoming>Payment_Processed_To_Replacement_Initiated</incoming>
         <incoming>Buyer_Approved_To_Replacement_Initiated</incoming>
         <outgoing>Replacement_Initiated_To_Replacement_Confirmed</outgoing>
@@ -93,8 +93,7 @@
         <allowedRoles>BUYER</allowedRoles>
         <allowedRoles>ADMIN</allowedRoles>
     </sequenceFlow>
-    <sequenceFlow id="Order_Confirmed_To_Order_Cancel_Initiated" sourceRef="ORDER_CONFIRMED"
-                  targetRef="ORDER_CANCEL_INITIATED">
+    <sequenceFlow id="Order_Confirmed_To_Order_Cancel_Initiated" sourceRef="ORDER_CONFIRMED" targetRef="ORDER_CANCEL_INITIATED">
         <allowedRoles>BUYER</allowedRoles>
         <allowedRoles>ADMIN</allowedRoles>
     </sequenceFlow>
@@ -102,8 +101,7 @@
         <allowedRoles>BUYER</allowedRoles>
         <allowedRoles>ADMIN</allowedRoles>
     </sequenceFlow>
-    <sequenceFlow id="Replacement_Confirmed_To_Ready_To_Ship" sourceRef="REPLACEMENT_CONFIRMED"
-                  targetRef="READY_TO_SHIP">
+    <sequenceFlow id="Replacement_Confirmed_To_Ready_To_Ship" sourceRef="REPLACEMENT_CONFIRMED" targetRef="READY_TO_SHIP">
         <allowedRoles>BUYER</allowedRoles>
         <allowedRoles>ADMIN</allowedRoles>
     </sequenceFlow>
@@ -131,18 +129,15 @@
         <allowedRoles>BUYER</allowedRoles>
         <allowedRoles>ADMIN</allowedRoles>
     </sequenceFlow>
-    <sequenceFlow id="Payment_Processed_To_Replacement_Initiated" sourceRef="PAYMENT_PROCESSED"
-                  targetRef="REPLACMENT_INITIATED">
+    <sequenceFlow id="Payment_Processed_To_Replacement_Initiated" sourceRef="PAYMENT_PROCESSED" targetRef="REPLACEMENT_INITIATED">
         <allowedRoles>BUYER</allowedRoles>
         <allowedRoles>ADMIN</allowedRoles>
     </sequenceFlow>
-    <sequenceFlow id="Buyer_Approved_To_Replacement_Initiated" sourceRef="BUYER_APPROVED"
-                  targetRef="REPLACMENT_INITIATED">
+    <sequenceFlow id="Buyer_Approved_To_Replacement_Initiated" sourceRef="BUYER_APPROVED" targetRef="REPLACEMENT_INITIATED">
         <allowedRoles>BUYER</allowedRoles>
         <allowedRoles>ADMIN</allowedRoles>
     </sequenceFlow>
-    <sequenceFlow id="Replacement_Initiated_To_Replacement_Confirmed" sourceRef="RETURN_INITIATED"
-                  targetRef="REPLACEMENT_CONFIRMED">
+    <sequenceFlow id="Replacement_Initiated_To_Replacement_Confirmed" sourceRef="REPLACEMENT_INITIATED" targetRef="REPLACEMENT_CONFIRMED">
         <allowedRoles>BUYER</allowedRoles>
         <allowedRoles>ADMIN</allowedRoles>
     </sequenceFlow>
@@ -158,8 +153,7 @@
         <allowedRoles>BUYER</allowedRoles>
         <allowedRoles>ADMIN</allowedRoles>
     </sequenceFlow>
-    <sequenceFlow id="Order_Cancel_Initiated_To_Order_Cancel_Confirmed" sourceRef="ORDER_CANCEL_INITIATED"
-                  targetRef="ORDER_CANCEL_CONFIRMED">
+    <sequenceFlow id="Order_Cancel_Initiated_To_Order_Cancel_Confirmed" sourceRef="ORDER_CANCEL_INITIATED" targetRef="ORDER_CANCEL_CONFIRMED">
         <allowedRoles>BUYER</allowedRoles>
         <allowedRoles>ADMIN</allowedRoles>
     </sequenceFlow>

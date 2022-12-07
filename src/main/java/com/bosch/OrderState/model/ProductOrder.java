@@ -13,13 +13,14 @@ import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Getter
 @Setter
 @ToString
 @Entity
 @Table(name = "TBL_PRODUCT_ORDER")
-public class ProductOrder {
+public class ProductOrder extends AuditTrail implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(generator = "system-uuid")

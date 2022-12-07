@@ -10,10 +10,11 @@ package com.bosch.OrderState.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "TBL_STATUS")
-public class Status {
+public class Status extends AuditTrail implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
